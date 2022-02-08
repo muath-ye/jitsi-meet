@@ -19,7 +19,7 @@ import {
     INTERVAL_MESSAGE,
     WEBHOOK_SEND_TIME_INTERVAL
 } from './constants';
-import { sendDataToWorker, sendFacialExpressionsWebhook } from './functions';
+import { getAppBaseUrl, sendDataToWorker, sendFacialExpressionsWebhook } from './functions';
 import logger from './logger';
 
 /**
@@ -65,14 +65,8 @@ export function loadWorker() {
 
             return;
         }
-        let baseUrl = '';
-        const app: Object = document.querySelector('script[src*="app.bundle.min.js"]');
 
-        if (app) {
-            const idx = app.src.lastIndexOf('/');
-
-            baseUrl = `${app.src.substring(0, idx)}/`;
-        }
+        const baseUrl = getAppBaseUrl();
         let workerUrl = `${baseUrl}facial-expressions-worker.min.js`;
 
         const workerBlob = new Blob([ `importScripts("${workerUrl}");` ], { type: 'application/javascript' });

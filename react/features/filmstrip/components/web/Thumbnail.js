@@ -23,6 +23,7 @@ import {
     getTrackByMediaTypeAndParticipant,
     updateLastTrackVideoMediaEvent
 } from '../../../base/tracks';
+import { getVideoObjectPosition } from '../../../face-centering/functions';
 import { PresenceLabel } from '../../../presence-status';
 import { getCurrentLayout, LAYOUTS } from '../../../video-layout';
 import {
@@ -159,6 +160,11 @@ export type Props = {|
      * Whether or not the participant has the hand raised.
      */
     _raisedHand: boolean,
+
+    /**
+     * The video object position for the participant.
+     */
+    _videoObjectPosition: string,
 
     /**
      * The video track that will be displayed in the thumbnail.
@@ -474,6 +480,7 @@ class Thumbnail extends Component<Props, State> {
             _isHidden,
             _isScreenSharing,
             _participant,
+            _videoObjectPosition,
             _videoTrack,
             _width,
             horizontalOffset,
@@ -516,6 +523,10 @@ class Thumbnail extends Component<Props, State> {
             videoStyles = {
                 display: 'none'
             };
+        }
+
+        if (videoStyles.objectFit === 'cover') {
+            videoStyles.objectPosition = _videoObjectPosition;
         }
 
         styles = {
@@ -995,6 +1006,7 @@ function _mapStateToProps(state, ownProps): Object {
         _localFlipX: Boolean(localFlipX),
         _participant: participant,
         _raisedHand: hasRaisedHand(participant),
+        _videoObjectPosition: getVideoObjectPosition(participant.id, state),
         _videoTrack,
         ...size
     };

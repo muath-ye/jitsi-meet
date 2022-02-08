@@ -2,7 +2,9 @@
  * CSS styles that are specific to the filmstrip that shows the thumbnail tiles.
  */
 .tile-view {
-
+    video {
+        transition: object-position 1s ease 0s;
+    }
     .remote-videos {
         align-items: center;
         box-sizing: border-box;

@@ -6,6 +6,24 @@ import { SET_TIMEOUT } from './constants';
 import logger from './logger';
 
 /**
+ * Retrieves app base url.
+ *
+ * @returns {string}
+ */
+export function getAppBaseUrl() {
+    let baseUrl = '';
+    const app = document.querySelector('script[src*="app.bundle.min.js"]');
+
+    if (app) {
+        const idx = app.src.lastIndexOf('/');
+
+        baseUrl = `${app.src.substring(0, idx)}/`;
+    }
+
+    return baseUrl;
+}
+
+/**
  * Sends the facial expression with its duration to all the other participants.
  *
  * @param {Object} conference - The current conference.
