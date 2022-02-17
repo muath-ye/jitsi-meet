@@ -46,6 +46,7 @@ import { ReactionsMenuButton } from '../../../reactions/components';
 import { REACTIONS, REACTIONS_MENU_HEIGHT } from '../../../reactions/constants';
 import { isReactionsEnabled } from '../../../reactions/functions.any';
 import {
+    HighlightButton,
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
@@ -715,6 +716,12 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
+        const highlight = {
+            key: 'highlight',
+            Content: HighlightButton,
+            group: 2
+        };
+
         const livestreaming = {
             key: 'livestreaming',
             Content: LiveStreamButton,
@@ -816,6 +823,7 @@ class Toolbox extends Component<Props> {
             cc,
             recording,
             localRecording,
+            highlight,
             livestreaming,
             muteEveryone,
             muteVideoEveryone,

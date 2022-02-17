@@ -598,6 +598,7 @@ var config = {
     //    'fullscreen',
     //    'hangup',
     //    'help',
+    //    'highlight',
     //    'invite',
     //    'livestreaming',
     //    'microphone',
